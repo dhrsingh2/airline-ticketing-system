@@ -8,11 +8,14 @@ import org.example.impl.Airline;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Logger;
+
 
 public class Main {
     public static void main(String[] args) {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader buff = new BufferedReader(isr);
+
         int selectedOperation = 0;
 
         // connecting to database

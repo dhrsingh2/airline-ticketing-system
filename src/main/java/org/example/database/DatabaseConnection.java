@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.example.util.MyLogger;
 
 public class DatabaseConnection {
     MongoClient mongoClient = null;
@@ -13,9 +14,11 @@ public class DatabaseConnection {
     public void connect(String connectionString) {
         try {
             this.mongoClient = MongoClients.create(connectionString);
-            System.out.println("Connected to MongoDB");
+//            System.out.println("Connected to MongoDB");
+            MyLogger.getInstance().log("Connected to MongoDB");
         } catch (Exception e) {
-            System.out.println("Error while connecting to MongoDB: " + e.getMessage());
+//            System.out.println("Error while connecting to MongoDB: " + e.getMessage());
+            MyLogger.getInstance().log("Error while connecting to MongoDB: " + e.getMessage());
         }
     }
 
@@ -24,7 +27,8 @@ public class DatabaseConnection {
             this.database = mongoClient.getDatabase(databaseName);
             return database;
         } else {
-            System.out.println("Error: No connection to MongoDB");
+//            System.out.println("Error: No connection to MongoDB");
+            MyLogger.getInstance().log("Error: No connection to MongoDB");
             return null;
         }
     }
@@ -33,7 +37,8 @@ public class DatabaseConnection {
         if (database != null) {
             return database.getCollection(collectionName);
         } else {
-            System.out.println("Error: No database selected");
+//            System.out.println("Error: No database selected");
+            MyLogger.getInstance().log("Error: No database selected");
             return null;
         }
     }
@@ -41,7 +46,8 @@ public class DatabaseConnection {
     public void close() {
         if (mongoClient != null) {
             mongoClient.close();
-            System.out.println("Connection to MongoDB closed");
+//            System.out.println("Connection to MongoDB closed");
+            MyLogger.getInstance().log("Connection to MongoDB closed");
         }
     }
 }

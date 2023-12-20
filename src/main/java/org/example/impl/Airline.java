@@ -9,9 +9,9 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.example.dto.Ticket;
 import org.example.util.HelperFunctions;
+import org.example.util.MyLogger;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,12 +55,14 @@ public class Airline implements Stock {
 
             tickets.insertOne(ticket);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
             return;
         }
 
         System.out.println("Successfully entered the ticket into the database\n");
+        MyLogger.getInstance().log("Successfully entered the ticket into the database\n");
     }
     public void updateTicketById() {
         try {
@@ -96,8 +98,10 @@ public class Airline implements Stock {
             tickets.updateOne(filter, updates);
 
             System.out.println("Ticket with id " + id + " has been updated.");
+            MyLogger.getInstance().log("Ticket with id " + id + " has been updated.");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void removeTicketById() {
@@ -113,7 +117,8 @@ public class Airline implements Stock {
 
             System.out.println("Ticket with id " + id + " has been deleted.");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void findByTitle() {
@@ -126,7 +131,8 @@ public class Airline implements Stock {
             ArrayList<Ticket> foundTickets = HelperFunctions.getTicketsFromDocumentAndDisplay(documents);
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void findByType() {
@@ -139,7 +145,8 @@ public class Airline implements Stock {
             ArrayList<Ticket> foundTickets = HelperFunctions.getTicketsFromDocumentAndDisplay(documents);
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void findByCost() {
@@ -152,7 +159,8 @@ public class Airline implements Stock {
             ArrayList<Ticket> foundTickets = HelperFunctions.getTicketsFromDocumentAndDisplay(documents);
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void findByCostRange() {
@@ -171,7 +179,8 @@ public class Airline implements Stock {
             ArrayList<Ticket> foundTickets = HelperFunctions.getTicketsFromDocumentAndDisplay(documents);
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void removeOldTickets() {
@@ -185,8 +194,10 @@ public class Airline implements Stock {
 
             long deletedCount = tickets.deleteMany(deleteFilter).getDeletedCount();
             System.out.println("Deleted " + deletedCount + " old tickets.");
+            MyLogger.getInstance().log("Deleted " + deletedCount + " old tickets.");
         } catch(Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
     }
     public void displayAllTickets() {
@@ -194,7 +205,8 @@ public class Airline implements Stock {
             FindIterable<Document> document = tickets.find();
             ArrayList<Ticket> foundTickets = HelperFunctions.getTicketsFromDocumentAndDisplay(document);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            MyLogger.getInstance().logException("An Exception occurred", e);
         }
 
     }
